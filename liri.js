@@ -27,16 +27,20 @@ switch(userCommand){
 
 //use node liri.js my-tweets to:
 //show last 20 tweets with timestamp in bash window
-tweets =>{
-    var client = new twitter(twitter.keys);
+function tweets(){
+    var client = new twitter(keys.twitter);
     var tweets = {
-        user_id: webdevpat,
-        count: 20
+        user_id: 958856873649811459,
+        count: 5
     };
 
-    client.get('statuses/user_timeline', (err, tweets, data) =>{
+    client.get('statuses/user_timeline', (err, tweets, response) =>{
         if (err) {throw err};
-        console.log(data);
+        // console.log(response);
+        var tweetLog = 
+        tweets.forEach(function(element){
+            console.log(`\n Tweet: ${element.text} \n time: ${element.created_at}`);
+        })
     })
 };
 
