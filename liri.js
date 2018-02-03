@@ -98,18 +98,17 @@ function spotify() {
 function movie() {
     // fs.appendFile('log.txt', )
     var movie = process.argv[3];
-    if(!movie){
+    if (!movie) {
         movie = 'mr nobody';
     }
     var request = require('request');
     var api = keys.omdb.key
-    request.get(`http://www.omdbapi.com/?t="${movie}"&y=&plot=&apikey=${api}"`, function(err, response, body){
+    request.get(`http://www.omdbapi.com/?t="${movie}"&y=&plot=&apikey=${api}"`, function (err, response, body) {
         // if (!err && response.statusCode == 200){
-            if (err) throw err;
-            var movieObject = JSON.parse(body);
-            console.log(movieObject);
-        }
-    )
+        if (err) throw err;
+        var movieObject = JSON.parse(body);
+        console.log(movieObject);
+    })
 }
 
 //use node liri.js do-what-it-says to:
