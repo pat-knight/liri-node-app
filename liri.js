@@ -26,7 +26,8 @@ switch (userCommand) {
     case 'do-what-it-says':
         doWhat();
         break;
-    default: console.log(choices);
+    default:
+        console.log(choices);
 }
 
 //use node liri.js my-tweets to:
@@ -47,8 +48,8 @@ function tweets() {
                 var stamp = element.created_at
                 // console.log(`\n Tweet: ${element.text} \n Time: ${element.created_at}`);
                 console.log(`${bumper} Tweet: ${content} \n Time: ${stamp}`);
-                
-                
+
+
                 fs.appendFile('log.txt', `${bumper} \n Tweet: ${content} \n Time: ${stamp}`, function (err) {
                     if (err) throw err;
 
@@ -70,7 +71,10 @@ function spotify() {
         song = 'The Sign'
     }
 
-    client.search({type: 'track', query: song}, function(err, data) {
+    client.search({
+        type: 'track',
+        query: song
+    }, function (err, data) {
         if (err) throw err;
         var curSong = data.tracks.items[0]; //current song based off user input
         var songName = song.toUpperCase();
@@ -78,25 +82,25 @@ function spotify() {
         var artist = curSong.album.artists[0].name;
         var sample = curSong.external_urls.spotify;
 
-        console.log (`  
+        console.log(`  
                         \n Artist: ${artist}
                         \n Song: ${song}
                         \n Album: ${album}
                         \n Preview: ${sample}
                         `);
-       
-        
-});
+
+
+    });
 }
 
 //use node liri.js movie-this '<movie name here>' to:
 //display movie title/year/imdb rating/ rotten tomatoes rating/ country/ lang/ plot/ actors
-movie (){
-    fs.appendFile('log.txt', )
-}
+// movie() {
+//     fs.appendFile('log.txt', )
+// }
 
 //use node liri.js do-what-it-says to:
 //take text inside random.txt, using it to call from random.txt
-doWhat (){
-    fs.appendFile('log.txt')
-}
+// doWhat() {
+//     fs.appendFile('log.txt')
+// }
