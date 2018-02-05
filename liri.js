@@ -103,13 +103,14 @@ function movie() {
     }
     var request = require('request');
     var api = keys.omdb.key
-    request.get(`http://www.omdbapi.com/?t="${movie}"&y=&plot=&apikey=${api}"`, function (err, response, body) {
+    request.get(`http://www.omdbapi.com/?t=${movie}&apikey=${api}`, function (err, response, body) {
         // if (!err && response.statusCode == 200){
         if (err) throw err;
         var movieObject = JSON.parse(body);
         console.log(movieObject);
     })
 }
+
 
 //use node liri.js do-what-it-says to:
 //take text inside random.txt, using it to call from random.txt
