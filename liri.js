@@ -41,17 +41,15 @@ function tweets() {
     var client = new twitter(keys.twitter);
     var tweets = {
         user_id: 958856873649811459,
-        count: 5
+        count: 20
     };
 
     client.get('statuses/user_timeline', (err, tweets, response) => {
         if (err) throw err;
-        // console.log(response);
         var tweetLog =
             tweets.forEach(function (element) {
                 var content = element.text;
                 var stamp = element.created_at
-                // console.log(`\n Tweet: ${element.text} \n Time: ${element.created_at}`);
                 console.log(`${bumper} Tweet: ${content} \n Time: ${stamp}`);
 
 
@@ -123,10 +121,8 @@ function movie() {
     var request = require('request');
     var api = keys.omdb.key
     request.get(`http://www.omdbapi.com/?t=${movie}&apikey=${api}`, function (err, response, body) {
-        // if (!err && response.statusCode == 200){
         if (err) throw err;
         var movieObject = JSON.parse(body);
-        // console.log(movieObject);
         console.log(`
             Title: ${movieObject.Title}
             Year: ${movieObject.Year}
@@ -138,7 +134,7 @@ function movie() {
         `)
 
         fs.appendFile('log.txt',
-                `Title: ${movieObject.Title}
+            `Title: ${movieObject.Title}
                 Year: ${movieObject.Year}
                 IMDB Rating: ${movieObject.imdbRating}
                 Rotten Tomatoes Rating: ${movieObject.Ratings[1].Value}
