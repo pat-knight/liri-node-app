@@ -6,8 +6,13 @@ const keys = require("./keys.js");
 const twitter = require("twitter");
 const Spotify = require('node-spotify-api');
 const bumper = "\n***********************************************\n "
-const userCommand = process.argv[2];
-const choices = "******************AVAILABLE COMMANDS******************"
+var userCommand = process.argv[2];
+var parameter = process.argv[3];
+const choices = `"******************AVAILABLE COMMANDS******************
+                \n command: my-tweets will display my last 20 tweets
+                \n command spotify-this-song 'song name' will return song info from spotify
+                \n command: movie-this 'any movie name' will return movie info from omdb
+                \n commsn: do-what-it-says will run one of liri's commands`
 
 
 switch (userCommand) {
@@ -64,7 +69,7 @@ function tweets() {
 
 //use node liri.js spotify-this-song '<song name here>' to:
 //show artist/name/preview link/ album
-function spotify() {
+function spotify(parameter) {
     var client = new Spotify(keys.spotify);
     var song = process.argv[3];
     if (!song) {
@@ -89,6 +94,20 @@ function spotify() {
                         \n Preview: ${sample}
                         `);
 
+        fs.appendFile('log.txt',
+            `\n Artist: ${artist}
+             \n Song: ${song}
+             \n Album: ${album}
+             \n Preview: ${sample}`,
+
+            function (err) {
+                if (err) throw err;
+
+                else {
+                    console.log("Content Added!");
+                }
+
+            });
 
     });
 }
@@ -117,12 +136,56 @@ function movie() {
             Plot: ${movieObject.Plot}
             Actors: ${movieObject.Actors}
         `)
+
+        fs.appendFile('log.txt',
+                `Title: ${movieObject.Title}
+                Year: ${movieObject.Year}
+                IMDB Rating: ${movieObject.imdbRating}
+                Rotten Tomatoes Rating: ${movieObject.Ratings[1].Value}
+                Country: ${movieObject.Country}
+                Plot: ${movieObject.Plot}
+                Actors: ${movieObject.Actors}`,
+
+            function (err) {
+                if (err) throw err;
+
+                else {
+                    console.log("Content Added!");
+                }
+
+            });
     })
 }
 
 
 //use node liri.js do-what-it-says to:
 //take text inside random.txt, using it to call from random.txt
-// doWhat() {
-//     fs.appendFile('log.txt')
-// }
+function doWhat() {
+    fs.readFile('random.txt', 'utf8', function (err, body) {
+        if (err) throw err;
+        var text = body.split(',');
+        userCommand = text[0];
+        var input = text[1];
+
+
+        switch (userCommand) {
+            case 'my-tweets':
+                tweets();
+                break;
+
+            case 'spotify-this-song':
+                process.argv[3] = input;
+                spotify();
+                break;
+
+            case 'movie-this':
+                process.argv[3] = input;
+                movie();
+                break;
+
+            default:
+                console.log(choices);
+        }
+
+    })
+}
