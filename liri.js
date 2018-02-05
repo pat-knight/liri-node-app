@@ -107,7 +107,16 @@ function movie() {
         // if (!err && response.statusCode == 200){
         if (err) throw err;
         var movieObject = JSON.parse(body);
-        console.log(movieObject);
+        // console.log(movieObject);
+        console.log(`
+            Title: ${movieObject.Title}
+            Year: ${movieObject.Year}
+            IMDB Rating: ${movieObject.imdbRating}
+            Rotten Tomatoes Rating: ${movieObject.Ratings[1].Value}
+            Country: ${movieObject.Country}
+            Plot: ${movieObject.Plot}
+            Actors: ${movieObject.Actors}
+        `)
     })
 }
 
