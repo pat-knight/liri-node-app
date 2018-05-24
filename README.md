@@ -50,7 +50,7 @@ Retrieve latest tweets from Twitter account
 #### spotify-this-song \<song name>
 Retrieve track information from Spotify.  
 ```
- $ node liri.js spotify-this-song "Kickstart my Heart"
+ $ node liri.js spotify-this-song "title"
 ```
 
 #### movie-this \<movie name>
