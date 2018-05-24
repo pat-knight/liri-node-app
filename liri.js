@@ -9,10 +9,10 @@ const bumper = "\n***********************************************\n "
 var userCommand = process.argv[2];
 var parameter = process.argv[3];
 const choices = `"******************AVAILABLE COMMANDS******************
-                \n command: my-tweets will display my last 20 tweets
-                \n command spotify-this-song 'song name' will return song info from spotify
-                \n command: movie-this 'any movie name' will return movie info from omdb
-                \n commsn: do-what-it-says will run one of liri's commands`
+                \n command: [node liri.js my-tweets] will display my last 20 tweets
+                \n command [node liri.js spotify-this-song] + ['song name'] will return song info from spotify
+                \n command: [node liri.js movie-this] + ['any movie name'] will return movie info from omdb
+                \n command: [node liri.js do-what-it-says] will run one of liri's commands`
 
 
 switch (userCommand) {
